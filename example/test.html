@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Carousel Test</title>
+	
+	<link rel="stylesheet" type="text/css" href="../src/css/carousel.css">
+	<script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../src/js/carousel.js"></script>
+</head>
+<body>
+
+	<h1>Carousel Test Document</h1>
+
+	<h2>Carousel 1: Arrow nav</h2>
+	<section class="carousel" id="carousel1">
+		<ul class="slides">
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg" data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li>
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li>
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li>
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li>
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+
+		</ul>
+		<a href="#" class="arrow left">Left</a>
+		<a href="#" class="arrow right">Right</a>
+	</section>
+
+	<hr/>
+	<h2>Carousel 2: Thumbs</h2>
+	<section class="carousel" id="carousel2">
+		<ul class="slides">
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg" data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+
+		</ul>
+		<div class="thumbs"></div>
+	</section>
+
+	<hr/>
+	<h2>Carousel 3: Zoomable smaller thumbs</h2>
+	<p>This slider zooms when clicked on. It also has smaller thumbs.</p>
+	<section class="carousel" id="carousel3">
+		<ul class="slides">
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg" data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+				<img src="/resize/files/t-short-sleeve_553x200-491b57.jpg">
+			</li>
+
+		</ul>
+		<div class="thumbs"></div>
+	</section>
+
+	<hr/>
+	<h2>Carousel 4: Zoomable with tags</h2>
+	<section class="carousel" id="carousel4">
+		<ul class="slides">
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-zoom="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-zoom="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-zoom="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-zoom="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-zoom="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+		</ul>
+		<a href="#" class="arrow left">Left</a>
+		<a href="#" class="arrow right">Right</a>
+	</section>
+	<hr/>
+
+	<h2>Carousel 5: One Image only thumbnail setting enabled</h2>
+	<p>Thumbnails don't display even if they are enabled when there is only one image in the gallery</p>
+	<section class="carousel" id="carousel5">
+		<ul class="slides">
+			<li data-thumb="/resize/files/t-short-sleeve_553x200-491b57.jpg"
+				data-image="/resize/files/t-short-sleeve_553x200-491b57.jpg"></li>
+		</ul>
+		<a href="#" class="arrow left">Left</a>
+		<a href="#" class="arrow right">Right</a>
+		<div class="thumbs"></div>
+	</section>
+
+	<hr/>
+
+	<script type="text/javascript">
+		$(document).on('ready', function() {
+			window.carousel1 = $('#carousel1').carousel();
+			window.carousel2 = $('#carousel2').carousel({
+				useThumbs: true
+			});
+			window.carousel3 = $('#carousel3').carousel({
+				useThumbs: true,
+				thumbConfig: { imagesPerSlide: 4.2 },
+				allowZoom: true
+			});
+			window.carousel4 = $('#carousel4').carousel({
+				allowZoom: true
+			});
+			window.carousel5 = $('#carousel5').carousel({
+				useThumbs: true
+			});
+		});
+	</script>
+</body>
+</html>

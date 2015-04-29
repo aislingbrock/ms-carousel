@@ -1,0 +1,27 @@
+{
+  "name": "Mothership Carousel",
+  "version": "0.0.0",
+  "authors": [
+    "Samuel Trangmar-Keates <sam@message.co.uk>"
+  ],
+  "description": "A carousel plugin for Mothership",
+  "main": "src/js/carousel.js",
+  "keywords": [
+    "Carousel",
+    "Javascript"
+  ],
+  "license": "MIT",
+  "homepage": "mothership.ec",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test",
+    "tests",
+    "example"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
