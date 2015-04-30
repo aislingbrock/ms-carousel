@@ -6,7 +6,8 @@
 }
 
 .carousel .thumbs li {
-	padding: 20px;
+	padding-left: .2%;
+	padding-right: .2%;
 }
 
 .carousel ul, 
@@ -46,4 +47,15 @@
 
 .carousel .arrow.right {
 	right: 0;
+}
+
+.carousel-zoom .unzoom {
+	position: absolute;
+}
+
+.arrow {
+	text-decoration: none;
+	color: black;
+	height: 100%;
+	top: 20px;
 }

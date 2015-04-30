@@ -54,14 +54,13 @@
 		if (animationType === 'slide') {
 			self.$slides.stop().animate({
 				marginLeft: marginLeft+'px'
-			}, animationSpeed, 'linear');
+			}, animationSpeed, 'linear', function () { self.update() });
 		} else if (animationType === 'none') {
 			self.$slides.css('margin-left', marginLeft+'px');
+			self.update();
 		} else {
 			throw new Error('Animation of type ' + animationType + ' is not supported');
 		}
-
-		self.update();
 
 		return slide;
 	};
@@ -159,7 +158,7 @@
 		}
 
 		if (typeof self.$zoom === 'undefined') {
-			$zoom = $('<div class="zoom">');
+			$zoom = $('<div class="carousel-zoom">');
 			$zoom.hide();
 			$zoom.on('click.carousel', '.unzoom', function (e) {
 				e.preventDefault();
@@ -179,8 +178,9 @@
 
 		$zoom.html($zoomImage);
 		$zoom.prepend('<a href="#" class="unzoom">X</a>')
-		$zoom.slideDown();
-		self.$element.stop().slideUp();
+		$zoom.show();
+
+		self.$element.stop().hide();
 
 		self.zoomed = true;
 	};
@@ -189,8 +189,8 @@
 		var self = this;
 
 		if (!self.zoomed) return false;
-		self.$zoom.stop().slideUp();
-		self.$element.slideDown();
+		self.$zoom.stop().hide();
+		self.$element.show();
 
 		self.zoomed = false;
 	};
@@ -199,13 +199,32 @@
 		this._initArrows();
 		this._initThumbs();
 		this._initZoom();
+		this._initDots();
+	};
+
+	Carousel.prototype._initDots = function () {
+		var self = this, i, $dot;
+
+		if (!self.config.useDots) return false;
+
+		self.$dots = $('<div class="dots">');
+
+		for (i=0; i<self.$slides.children().size(); ++i) {
+			$dot = $('<a href="#" class="dot" data-slide='+i+'>'+(i+1)+'</a>');
+			self.$dots.append($dot);
+		}
+
+		self.$dots.on('click.carousel', '.dot', function (e) {
+			e.preventDefault();
+			self.goTo($(this).data('slide'));
+		});
+
+		self.$element.append(self.$dots);
 	};
 
 	Carousel.prototype._initThumbs = function () {
 		var self = this,
-			$thumbs = (self.config.thumbElement ? 
-				self.config.thumbElement : 
-				self.$element.children('.thumbs')),
+			$thumbs = self.config.thumbElement || self.$element.children('.thumbs'),
 			thumbCarousel,
 			defaultThumbConfig = {
 				imagesPerSlide: 2.6
@@ -266,7 +285,7 @@
 			arrowLeft = self.$element.children('.arrow.left');
 
 			if (!arrowLeft.size()) {
-				arrowLeft = $('<a href="#" class="arrow left">prev</a>');
+				arrowLeft = $('<a href="#" class="arrow left"><span>Prev</span></a>');
 				self.$element.append(arrowLeft);
 			}
 		}
@@ -275,7 +294,7 @@
 			arrowRight = self.$element.children('.arrow.right');
 
 			if (!arrowRight.size()) {
-				arrowRight = $('<a href="#" class="arrow right">next</a>');
+				arrowRight = $('<a href="#" class="arrow right"><span>Next</span></a>');
 				self.$element.append(arrowRight);
 			}
 		}
