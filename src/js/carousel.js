@@ -7,8 +7,9 @@
  * useThumbs (false): if true then thumbnail navigation will be used
  * thumbElement (undefined): if given this will be used to contain the thumbs
  * animation:
- *   - type (slide): the type of animation (currently supports slide and none)
- *   - speed (500): if the animation supports speed, then this value will be used
+ *   - type (slide): the type of animation (currently supports slide, custom and none by default)
+ *   - customAnimation (undefined): a custom animation function to be used with animation type 'custom'
+ * animations (object): the animation functions
  * imagesPerSlide (1): the number of images shown at any one time
  * allowZoom (false): if true then then images will zoom on click
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
@@ -25,7 +26,24 @@
 			},
 			useThumbs: false,
 			imagesPerSlide: 1,
-			allowZoom: false
+			allowZoom: false,
+			animations: {
+				slide: function (carousel, slide, speed) {
+					var marginLeft = -slide*carousel.width,
+						animationSpeed = carousel.config.animation.speed || speed || 500
+					;
+
+					carousel.$slides.stop().animate({
+						marginLeft: marginLeft+'px'
+					}, animationSpeed, 'linear');
+				},
+				none: function(carousel, slide) {
+					var marginLeft = -slide*carousel.width;
+
+					carousel.$slides.css('margin-left', marginLeft+'px');
+					// carousel.update();
+				}
+			}
 		};
 
 		this.$element     = $element;
@@ -36,11 +54,11 @@
 		this.zoomed       = false;
 	}
 
-	Carousel.prototype.goTo = function (slide) {
+	Carousel.prototype.goTo = function (slide, speed) {
 		var self = this,
 			animationType = self.config.animation.type,
-			animationSpeed = self.config.animation.speed,
-			marginLeft = - slide*this.width
+			animationSpeed = self.config.animation.speed || speed,
+			marginLeft = -slide*this.width
 		;
 
 		self.currentSlide = slide;
@@ -49,16 +67,13 @@
 			throw new Error('Slide out of range');
 		}
 
-		if (animationType === 'slide') {
-			self.$slides.stop().animate({
-				marginLeft: marginLeft+'px'
-			}, animationSpeed, 'linear', function () { self.update(); });
-		} else if (animationType === 'none') {
-			self.$slides.css('margin-left', marginLeft+'px');
-			self.update();
+		if (self.config.animations[animationType]) {
+			self.config.animations[animationType](self, slide, animationSpeed);
 		} else {
 			throw new Error('Animation of type ' + animationType + ' is not supported');
 		}
+
+		self._updateControls();
 
 		return slide;
 	};
@@ -96,7 +111,7 @@
 
 		self._updateControls();
 
-		$slides.css('margin-left', - self.currentSlide*this.width+'px');
+		self.goTo(self.currentSlide, 0);
 	};
 
 	Carousel.prototype._updateControls = function () {

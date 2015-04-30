@@ -171,6 +171,21 @@
 			</ul>
 		</section>
 		<hr/>
+	
+		<h2>Carousel 7: Custom transitions</h2>
+
+		<section class="carousel" id="carousel7">
+			<ul class="slides">
+				<li data-image="./img/normal/6_norm.jpg"></li>
+				<li data-image="./img/normal/2_norm.jpg"></li>
+				<li data-image="./img/normal/3_norm.jpg"></li>
+				<li data-image="./img/normal/4_norm.jpg"></li>
+				<li data-image="./img/normal/5_norm.jpg"></li>
+				<li data-image="./img/normal/7_norm.jpg"></li>
+			</ul>
+		</section>
+
+		<hr/>
 		<h2>Resources</h2>
 		<p>
 			Available from <a href="https://github.com/messagedigital/ms-carousel">
@@ -206,6 +221,18 @@
 			window.carousel6 = $('#carousel6').carousel({
 				useArrows: false,
 				useDots: true
+			});
+			window.carousel7 = $('#carousel7').carousel({
+				animation: {
+					type: 'custom'
+				},
+				animations: {
+					custom: function (carousel, slide, speed) {
+						carousel.$slides.children().fadeOut(function() {
+							carousel.$slides.children('*:nth-child('+(slide+1)+')').fadeIn();
+						});
+					}
+				}
 			});
 		});
 	</script>
