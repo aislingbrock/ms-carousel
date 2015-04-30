@@ -15,8 +15,7 @@
 	list-style: none;
 }
 
-.carousel .slides > li, 
-.carousel .thumbs > ul > li {
+.carousel li {
 	float: left;
 }
 
@@ -56,6 +55,16 @@
 .arrow {
 	text-decoration: none;
 	color: black;
-	height: 100%;
-	top: 20px;
+}
+
+.carousel .dots {
+	bottom: 0;
+	width: 100%;
+	padding: 0;
+}
+
+.carousel .dots li {
+	width: auto;
+	margin-left: 2px;
+	margin-right: 2px;
 }

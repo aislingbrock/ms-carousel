@@ -101,8 +101,9 @@
 	<hr/>
 	<h2>Carousel 4: Smaller thumbs</h2>
 	<p>
-		This Carousel has smaller thumbnails. The thumbnails are in a carousel 
-		and options may be set using the thumbConfig setting.
+		This Carousel has smaller thumbnails, the thumbnail animation speed is
+		also increased. The thumbnails are in a carousel and options may be set
+		using the thumbConfig setting.
 	</p>
 	<section class="carousel" id="carousel4">
 		<ul class="slides">
@@ -187,7 +188,13 @@
 			});
 			window.carousel4 = $('#carousel4').carousel({
 				useThumbs: true,
-				thumbConfig: { imagesPerSlide: 4.2 }
+				thumbConfig: {
+					imagesPerSlide: 4.2,
+					animation: {
+						speed: 300,
+						type: 'slide'
+					}
+				}
 			});
 			window.carousel5 = $('#carousel5').carousel({
 				useThumbs: true

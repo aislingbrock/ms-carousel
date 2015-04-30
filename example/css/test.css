@@ -2,6 +2,24 @@
 	font-family: sans-serif;
 }
 
+.arrow.left {
+	background-image: url('../img/control/arrow-left.png');
+}
+
+.arrow.right {
+	background-image: url('../img/control/arrow-right.png');
+}
+
+.arrow {
+	background-size: 100%;
+	min-height: 100%;
+	min-width: 20px;
+}
+
+.arrow span {
+	display: none;
+}
+
 .content {
 	padding-left: 2em;
 	padding-right: 2em;

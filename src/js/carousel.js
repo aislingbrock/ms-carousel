@@ -207,15 +207,18 @@
 
 		if (!self.config.useDots) return false;
 
-		self.$dots = $('<div class="dots">');
+		self.$dots = $('<ol class="dots">');
 
 		for (i=0; i<self.$slides.children().size(); ++i) {
-			$dot = $('<a href="#" class="dot" data-slide='+i+'>'+(i+1)+'</a>');
+			$dot = $('<li><a href="#" class="dot'+(self.currentSlide === i ? ' active' : '')+
+				'" data-slide='+i+'><span>'+(i+1)+'</span></a></li>');
 			self.$dots.append($dot);
 		}
 
 		self.$dots.on('click.carousel', '.dot', function (e) {
 			e.preventDefault();
+			$(this).parent().siblings().removeClass('active');
+			$(this).parent().addClass('active');
 			self.goTo($(this).data('slide'));
 		});
 
@@ -242,7 +245,8 @@
 
 		self.$slides.children().each(function(k, v) {
 			var imgurl = $(v).data('thumb'),
-				element = $('<li><a class="thumb" data-slide="'+k+'" href="#"><img src="'+imgurl+'"></a></li>')
+				element = $('<li><a class="thumb'+(self.currentSlide === k ? ' active' : '')+
+					'" data-slide="'+k+'" href="#"><img src="'+imgurl+'"></a></li>')
 			;
 
 			$thumbs.children('.slides').append(element);
@@ -250,6 +254,8 @@
 
 		$thumbs.on('click.carousel', '.thumb', function (e) {
 			e.preventDefault();
+			$(this).parent().siblings().removeClass('active');
+			$(this).parent().addClass('active');
 			self.goTo($(this).data('slide'));
 		});
 
