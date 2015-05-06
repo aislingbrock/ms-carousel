@@ -189,7 +189,7 @@
 		<h2>Resources</h2>
 		<p>
 			Available from <a href="https://github.com/messagedigital/ms-carousel">
-			Github</a>. Plugin by <a href="http://mothership.ec">Mothership Ecommerce</a>
+			Github</a>. Plugin by <a href="http://mothership.ec">Mothership Ecommerce</a>.
 		</p>
 	</div>
 
@@ -222,13 +222,14 @@
 				useArrows: false,
 				useDots: true
 			});
+			var n = 0;
 			window.carousel7 = $('#carousel7').carousel({
 				animation: {
 					type: 'custom'
 				},
 				animations: {
 					custom: function (carousel, slide, speed) {
-						carousel.$slides.children().fadeOut(function() {
+						$.when(carousel.$slides.children().fadeOut()).done(function() {
 							carousel.$slides.children('*:nth-child('+(slide+1)+')').fadeIn();
 						});
 					}
