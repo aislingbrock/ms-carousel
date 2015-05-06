@@ -110,8 +110,6 @@
 		});
 
 		self._updateControls();
-
-		self.goTo(self.currentSlide, 0);
 	};
 
 	Carousel.prototype._updateControls = function () {
