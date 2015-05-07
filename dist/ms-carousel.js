@@ -129,6 +129,11 @@
 				this.controls.arrowRight.removeClass('disabled');
 			}
 		}
+
+		if (typeof this.$dots !== 'undefined') {
+			this.$dots.children().removeClass('active');
+			this.$dots.children('*:nth-child('+(this.currentSlide+1)+')').addClass('active');
+		}
 	};
 
 	Carousel.prototype.init = function () {
@@ -162,7 +167,8 @@
 			$zoomSlide = self.$slides.children('*:nth-child('+(slide+1)+')'), // slide+1 as nth-child is 1 indexed
 			$zoomImage = $('<img src="'+ 
 				($zoomSlide.data('zoom') || $zoomSlide.data('image') || $zoomSlide.children('img').first().attr('src')) +
-				'">')
+				'">'),
+			$closeButton
 		;
 
 		if (slide > self.slideCount - 1) {
@@ -188,8 +194,9 @@
 			self.unZoom();
 		}
 
+		$closeButton = $zoom.children('.unzoom').size() ? $zoom.children('.unzoom') : $;
 		$zoom.html($zoomImage);
-		$zoom.prepend('<a href="#" class="unzoom">X</a>');
+		$zoom.prepend('<a href="#" class="unzoom">Close</a>');
 		$zoom.show();
 
 		self.$element.stop().hide();
@@ -229,8 +236,6 @@
 
 		self.$dots.on('click.carousel', '.dot', function (e) {
 			e.preventDefault();
-			$(this).parent().siblings().removeClass('active');
-			$(this).parent().addClass('active');
 			self.goTo($(this).data('slide'));
 		});
 
