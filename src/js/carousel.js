@@ -12,6 +12,7 @@
  * animations (object): the animation functions
  * imagesPerSlide (1): the number of images shown at any one time
  * allowZoom (false): if true then then images will zoom on click
+ * zoomElement (undefined): if not given an element will automatically be inserted
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
  */
 (function($, window, document) {
@@ -238,13 +239,14 @@
 
 	Carousel.prototype._initThumbs = function () {
 		var self = this,
-			$thumbs = self.config.thumbElement || self.$element.children('.thumbs'),
+			$thumbs = self.config.thumbElement || $(self.$element.data('thumbs')),
 			thumbCarousel,
 			defaultThumbConfig = {
 				imagesPerSlide: 2.6
 			},
 			thumbConfig
 		;
+
 
 		thumbConfig = $.extend(defaultThumbConfig, self.config.thumbConfig || {});
 
@@ -271,6 +273,7 @@
 		});
 
 		thumbCarousel = new Carousel($thumbs, thumbConfig);
+		$thumbs.addClass('carousel');
 		thumbCarousel.init();
 
 		self.thumbs = thumbCarousel;
@@ -279,15 +282,26 @@
 	};
 
 	Carousel.prototype._initZoom = function () {
-		var self = this;
+		var self = this,
+			$zoom = $(self.config.zoomElement || self.$element.data('zoom'))
+		;
 
 		if (!this.config.allowZoom) return false;
+
+		$zoom.on('click.carousel', '.unzoom', function (e) {
+			e.preventDefault();
+			self.unZoom();
+		});
 
 		self.$slides.children().each(function (k, v) {
 			$(v).on('click.carousel', function () {
 				self.zoom(k);
 			});
 		});
+
+		if ($zoom) {
+			self.$zoom = $zoom;
+		}
 	};
 
 	Carousel.prototype._initArrows = function () {

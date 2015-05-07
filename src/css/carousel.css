@@ -1,11 +1,11 @@
 .carousel,
-.carousel .thumbs {
+.thumbs {
 	overflow: hidden;
 	clear: both;
 	position: relative;
 }
 
-.carousel .thumbs li {
+.thumbs li {
 	padding-left: .2%;
 	padding-right: .2%;
 }

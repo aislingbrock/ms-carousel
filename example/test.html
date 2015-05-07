@@ -41,7 +41,8 @@
 
 		<hr/>
 		<h2>Carousel 2: Thumbs</h2>
-		<section class="carousel" id="carousel2">
+		<p>A class of carousel is automatically added to the thumbs element</p>
+		<section class="carousel" id="carousel2" data-thumbs="#thumbs2">
 			<ul class="slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg">
 					<img src="./img/normal/6_norm.jpg">
@@ -62,13 +63,13 @@
 					<img src="./img/normal/7_norm.jpg">
 				</li>
 			</ul>
-			<div class="thumbs"></div>
 		</section>
+		<div id="thumbs2" class="carousel thumbs"></div>
 
 		<hr/>
 		<h2>Carousel 3: Zoomable</h2>
 		<p>This slider zooms when clicked on.</p>
-		<section class="carousel" id="carousel3">
+		<section class="carousel" id="carousel3" data-thumbs="#thumbs3" data-zoom="#zoom3">
 			<ul class="slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"
@@ -95,8 +96,9 @@
 					data-zoom="./img/7.jpg"></li>
 
 			</ul>
-			<div class="thumbs"></div>
 		</section>
+		<div id="zoom3" class="carousel-zoom"></div>
+		<div id="thumbs3" class="carousel thumbs"></div>
 
 		<hr/>
 		<h2>Carousel 4: Thumbnail options</h2>
@@ -105,7 +107,7 @@
 			also increased. The thumbnails are in a carousel and options may be set
 			using the thumbConfig setting.
 		</p>
-		<section class="carousel" id="carousel4">
+		<section class="carousel" id="carousel4" data-thumbs="#thumbs4">
 			<ul class="slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"></li>
@@ -127,8 +129,8 @@
 			</ul>
 			<a href="#" class="arrow left"><span>Prev</span></a>
 			<a href="#" class="arrow right"><span>Next</span></a>
-			<div class="thumbs"></div>
 		</section>
+		<div id="thumbs4" class="carousel thumbs"></div>
 		<hr/>
 
 		<h2>Carousel 5: One Image only thumbnail setting enabled</h2>
@@ -136,15 +138,15 @@
 			Thumbnails don't display even if they are enabled when there is only one 
 			image in the gallery
 		</p>
-		<section class="carousel" id="carousel5">
+		<section class="carousel" id="carousel5" data-thumbs="#thumbs5">
 			<ul class="slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"></li>
 			</ul>
 			<a href="#" class="arrow left"><span>Prev</span></a>
 			<a href="#" class="arrow right"><span>Next</span></a>
-			<div class="thumbs"></div>
 		</section>
+		<div class="carousel thumbs" id="thumbs5"></div>
 
 		<hr/>
 		<h2>Carousel 6: Dots</h2>
@@ -224,7 +226,6 @@
 				useArrows: false,
 				useDots: true
 			});
-			var n = 0;
 			window.carousel7 = $('#carousel7').carousel({
 				animation: {
 					type: 'custom'
