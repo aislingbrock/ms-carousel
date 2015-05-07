@@ -2,22 +2,53 @@
 	font-family: sans-serif;
 }
 
-.arrow.left {
-	background-image: url('../img/control/arrow-left.png');
+.carousel .arrow {
+	opacity: 0.5;
+	position: absolute;
+	top: 50%;
+	margin-top: -30px;
 }
 
-.arrow.right {
-	background-image: url('../img/control/arrow-right.png');
+.carousel .arrow.left {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 25px 30px 25px 0;
+	border-color: transparent #ffffff transparent transparent;
+	left: 10px;
 }
 
-.arrow {
-	background-size: 100%;
-	min-height: 100%;
-	min-width: 20px;
+.carousel .arrow.right {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 25px 0 25px 30px;
+	border-color: transparent transparent transparent #ffffff;
+	right: 10px;
 }
 
-.arrow span {
+.carousel .arrow:hover {
+	opacity: 1;
+}
+
+.carousel .arrow span {
 	display: none;
+}
+
+ol.dots {
+	overflow: hidden;
+}
+
+ol.dots li a {
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background-color: #333;
+	text-indent: -999em;
+}
+
+ol.dots li.active a {
+	background-color: red;
 }
 
 .content {
@@ -26,4 +57,9 @@
 	max-width: 768px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.carousel-zoom,
+.carousel-zoom img {
+	max-width: 100%;
 }
