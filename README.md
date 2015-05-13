@@ -77,18 +77,19 @@ This will generate a new carousel in the thumbnail element and link it's slides 
 
 The options that may be passed in are as follows:
 
-- useArrows(true): Show arrows if true.
-- arrowLeft(undefined): The element to use as the left arrow control, If not set and useArrows is true, arrows will be generated.
-- arrowRight(undefined): The element to use as the right arrow control, If not set and useArrows is true, arrows will be generated.
-- useThumbs(false): Use thumbnail navigation if true.
-- thumbElement(undefined): The element to use for thumbs. This may be set using the 'data-thumbs' attribute.
-- animation(object)
-  - type('slide'): The type of animation to use, slide and none are available by default. More may be added by setting the 'animations' option.
-  - speed(500): The animation speed
-- animations(object): An object containing the functions defining animations.
-- imagesPerSlide(1): The number of images to show at any one time.
-- allowZoom(false): Allows zoom to a larger view if true.
-- zoomElement(undefined): The element to insert the larger image view into. If undefined an element will be inserted after the carousel.
-- hideCarouselOnZoom(true): Hide the carousel when a zoom happens.
-- hideThumbsOnZoom(true): Hide the thumbnails when a zoom happens.
-- thumbConfig(undefined): The config to use when creating the Thumbnail carousel. It may take all the same options as the regular carousel.
+Option             | Default   | Type                         | Description
+:---------         |:--------: |:--------------------------:  |:-----------
+useArrows          | true      | boolean                      | Use arrow navigation if true.
+arrowLeft          | undefined | string&#124;jquery           | The element or id of element to use as the left arrow contorl. If not set and useArrows is true, arrows will be generated.
+arrowRight         | undefined | string&#124;jquery           | The element or id of element to use as the right arrow contorl. If not set and useArrows is true, arrows will be generated.
+useDots            | false     | boolean                      | Use dot navigation if true.
+useThumbs          | false     | boolean                      | Use thumbnail navigation if true.
+thumbElement       | undefined | string&#124;jquery           | The element to use for thumbs. This may be set using the 'data-thumbs' attribute.
+animation          | object    | object                       | Animation settings object. Contains type (default "slide"): The type of animation to use, slide and none are available by default. More may be added by setting the 'animations' option. and speed (default 500): The animation speed.
+animations         | object    | object                       | Contains the animations that may be used by setting animation type.
+imagesPerSlide     | 1         | int                          | The number of images to show at any one time.
+allowZoom          | false     | boolean                      | Allows zoom to a larger view if true.
+zoomElement        | undefined | string&#124;jquery           | The element to insert the larger image view into. If undefined an element will be inserted after the carousel.
+hideCarouselOnZoom | true      | boolean                      | Hide the carousel when a zoom happens.
+hideThumbsOnZoom   | true      | boolean                      | Hide the thumbnails when a zoom happens.
+thumbConfig        | object    | object                       | The config to use when creating the Thumbnail carousel. It may take all the same options as the regular carousel. By default arrows are shown and imagesPerSlide is set to 2.6
