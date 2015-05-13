@@ -63,3 +63,7 @@ ol.dots li.active a {
 .carousel-zoom img {
 	max-width: 100%;
 }
+
+.modal {
+	position: fixed;
+}

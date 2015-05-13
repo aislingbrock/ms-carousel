@@ -7,12 +7,14 @@
  * useThumbs (false): if true then thumbnail navigation will be used
  * thumbElement (undefined): if given this will be used to contain the thumbs
  * animation:
- *   - type (slide): the type of animation (currently supports slide, custom and none by default)
- *   - customAnimation (undefined): a custom animation function to be used with animation type 'custom'
+ *   - type (slide): the type of animation (currently supports slide and none by default)
+ *   - speed (500): the animation speed
  * animations (object): the animation functions
  * imagesPerSlide (1): the number of images shown at any one time
  * allowZoom (false): if true then then images will zoom on click
  * zoomElement (undefined): if not given an element will automatically be inserted
+ * hideCarouselOnZoom (true): carousel will be hidden on zoom
+ * hideThumbsOnZoom (true): thumbnails will be hidden on zoom 
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
  */
 (function($, window, document) {
@@ -26,6 +28,8 @@
 				speed: 500,
 			},
 			useThumbs: false,
+			hideThumbsOnZoom: true,
+			hideCarouselOnZoom: true,
 			imagesPerSlide: 1,
 			allowZoom: false,
 			animations: {
@@ -194,12 +198,19 @@
 			self.unZoom();
 		}
 
-		$closeButton = $zoom.children('.unzoom').size() ? $zoom.children('.unzoom') : $;
+		$closeButton = $zoom.children('.unzoom').size() ? $zoom.children('.unzoom') : $('<a href="#" class="unzoom">Close</a>');
 		$zoom.html($zoomImage);
-		$zoom.prepend('<a href="#" class="unzoom">Close</a>');
-		$zoom.show();
+		$zoom.prepend($closeButton);
+		
+		$zoom.stop().slideDown();
 
-		self.$element.stop().hide();
+		if (self.config.hideCarouselOnZoom) {
+			self.$element.stop().slideUp();
+		}
+
+		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
+			self.thumbs.$element.stop().slideUp();
+		}
 
 		self.zoomed = true;
 	};
@@ -208,8 +219,16 @@
 		var self = this;
 
 		if (!self.zoomed) return false;
-		self.$zoom.stop().hide();
-		self.$element.show();
+		
+		self.$zoom.stop().slideUp();
+		
+		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
+			self.thumbs.$element.stop().slideDown();
+		}
+
+		if (self.config.hideCarouselOnZoom) {
+			self.$element.stop().slideDown();
+		}
 
 		self.zoomed = false;
 	};
