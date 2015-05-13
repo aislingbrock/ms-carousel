@@ -64,6 +64,17 @@ ol.dots li.active a {
 	max-width: 100%;
 }
 
+.carousel-zoom .unzoom {
+	display: block;
+	background: #333;
+	color: #FFF;
+	padding: 5px 10px;
+}
+
+.carousel-zoom .unzoom:hover {
+	background: #666;
+}
+
 .modal {
 	position: fixed;
 }
