@@ -22,7 +22,7 @@ This library exposes a JQuery carousel function: `carousel(options)`. A carousel
 </section>
 
 <script>
-  window.carousel1 = $('#carousel1').carousel();
+    $('#carousel1').carousel();
 </script>
 ```
 
@@ -31,6 +31,32 @@ The image inside of each the slides may also be defined in a data attribute. For
 <li data-image="img/slide1"></li>
 ```
 would work in the same way.
+
+## Zoom
+
+The zoom functionality allows a larger image to be displayed whilst hiding the carousel. The options relating to this are `allowZoom`, `hideCarouselOnZoom`, `hideThumbsOnZoom` and `zoomElement`.
+
+A zoom element should either be passed to the plugin via the `zoomElement` option or specified in the `data-zoom` attribute, each slide should specify their own zoom images in their own `data-zoom` attributes. This element will be filled with the larger image when the carousel is clicked and hidden when the 'Close' button is clicked. If using a zoom element, a custom 'Close' button may be included. This button must have a class of `unzoom`.
+
+`hideCarouselOnZoom` and `hideThumbsOnZoom` may be set to false to keep the carousel open when showing the zoomed image.
+
+```html
+<section class="carousel" id="carousel" data-thumbs="#thumbs" data-zoom="#zoom">
+  <ul class="slides">
+    <li data-image="./img/normal/1.jpg"
+        data-zoom="./img/1.jpg"></li>
+    <li data-image="./img/normal/2.jpg"
+        data-zoom="./img/2.jpg"></li>
+    <li data-image="./img/normal/3.jpg"
+        data-zoom="./img/3.jpg"></li>
+  </ul>
+</section>
+<div id="zoom" class="carousel-zoom"></div>
+
+<script>
+    $('#carousel').carousel({ allowZoom: true });
+</script>
+```
 
 ## Navigation
 
@@ -44,9 +70,6 @@ Using thumbnails:
 ```html
 <section class="carousel" id="carousel" data-thumbs="#thumbs">
   <ul class="slides">
-    <li data-thumb="img/thumbs/6_thumb.jpg">
-      <img src="img/normal/6_norm.jpg">
-    </li>
     <li data-thumb="img/thumbs/2_thumb.jpg">
       <img src="img/normal/2_norm.jpg">
     </li>
@@ -56,22 +79,38 @@ Using thumbnails:
     <li data-thumb="img/thumbs/4_thumb.jpg">
       <img src="img/normal/4_norm.jpg">
     </li>
-    <li data-thumb="img/thumbs/5_thumb.jpg">
-      <img src="img/normal/5_norm.jpg">
-    </li>
-    <li data-thumb="img/thumbs/7_thumb.jpg">
-      <img src="img/normal/7_norm.jpg">
-    </li>
   </ul>
 </section>
 <div id="thumbs" class="carousel thumbs"></div>
 
 <script>
-  window.carousel2 = $('#carousel').carousel({ useThumbs: true });
+    $('#carousel').carousel({ useThumbs: true });
 </script>
 ```
 
 This will generate a new carousel in the thumbnail element and link it's slides to the controls.
+
+## Custom Animations
+
+Custom animations may be defined in the `animations` option. These are functions may be called when the `goTo()` function is called. They are sould be defined as `function(carousel, slide, speed)` and should modify the `carousel.$slides` to achieve a transition to the correct slide.
+
+The following example defines a custom animation to fade between slides in `animations` and sets it as the animation to use in the `animation` option.
+```html
+<script>
+$('#carousel').carousel({
+    animation: {
+        type: 'custom'
+    },
+    animations: {
+        custom: function (carousel, slide, speed) {
+            $.when(carousel.$slides.children().fadeOut()).done(function() {
+                carousel.$slides.children('*:nth-child('+(slide+1)+')').fadeIn();
+            });
+        }
+    }
+});
+</script>
+```
 
 ## Options
 

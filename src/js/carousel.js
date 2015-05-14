@@ -323,6 +323,8 @@
 			});
 		});
 
+		$zoom.hide();
+
 		if ($zoom) {
 			self.$zoom = $zoom;
 		}
