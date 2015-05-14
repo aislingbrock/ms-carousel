@@ -16,6 +16,9 @@
  * hideCarouselOnZoom (true): carousel will be hidden on zoom
  * hideThumbsOnZoom (true): thumbnails will be hidden on zoom 
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
+ *
+ * automatic (false): wheather to change automatically
+ * automaticDelay (800): the delay between automatic changes
  */
 (function($, window, document) {
 	'use strict';
@@ -34,21 +37,24 @@
 			allowZoom: false,
 			animations: {
 				slide: function (carousel, slide, speed) {
-					var marginLeft = -slide*carousel.width,
-						animationSpeed = carousel.config.animation.speed || speed || 500
-					;
+					var marginLeft = -slide*carousel.width;
+
+					if (typeof speed == 'undefined') {
+						speed = 500;
+					}
 
 					carousel.$slides.stop().animate({
 						marginLeft: marginLeft+'px'
-					}, animationSpeed, 'linear');
+					}, speed, 'linear');
 				},
 				none: function(carousel, slide) {
 					var marginLeft = -slide*carousel.width;
 
 					carousel.$slides.css('margin-left', marginLeft+'px');
-					// carousel.update();
 				}
-			}
+			},
+			automatic: false,
+			automaticDelay: 2000
 		};
 
 		this.$element     = $element;
@@ -62,9 +68,12 @@
 	Carousel.prototype.goTo = function (slide, speed) {
 		var self = this,
 			animationType = self.config.animation.type,
-			animationSpeed = self.config.animation.speed || speed,
 			marginLeft = -slide*this.width
 		;
+
+		if (typeof speed == 'undefined') {
+			speed = self.config.animation.speed;
+		}
 
 		self.currentSlide = slide;
 
@@ -73,7 +82,7 @@
 		}
 
 		if (self.config.animations[animationType]) {
-			self.config.animations[animationType](self, slide, animationSpeed);
+			self.config.animations[animationType](self, slide, speed);
 		} else {
 			throw new Error('Animation of type ' + animationType + ' is not supported');
 		}
@@ -96,7 +105,6 @@
 			return;
 		}
 
-
 		return this.goTo(this.currentSlide - 1);
 	};
 
@@ -113,6 +121,8 @@
 		$slides.children().each(function (key, item) {
 			$(item).outerWidth(self.width/self.config.imagesPerSlide);
 		});
+
+		self.goTo(self.currentSlide, 0);
 
 		self._updateControls();
 	};
@@ -161,6 +171,16 @@
 				$v.append($('<img src="'+image+'">'));
 			}
 		});
+
+		if (self.config.automatic) {
+			window.setInterval(function () {
+				if (self.currentSlide + 1 >= self.slideCount) {
+					self.goTo(0);
+				} else{
+					self.next();
+				}
+			}, self.config.automaticDelay);
+		}
 
 		self.update();
 	};

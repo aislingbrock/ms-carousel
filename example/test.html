@@ -229,6 +229,21 @@
 		<div id="zoom8" class="carousel-zoom"><a href="#" class="unzoom">Close Modal</a></div>
 
 		<hr/>
+
+		<h1>Carousel 9: Automatic Sliding</h1>
+		<section class="carousel" id="carousel9">
+			<ul class="slides">
+				<li data-image="./img/normal/6_norm.jpg"></li>
+				<li data-image="./img/normal/2_norm.jpg"></li>
+				<li data-image="./img/normal/3_norm.jpg"></li>
+				<li data-image="./img/normal/4_norm.jpg"></li>
+				<li data-image="./img/normal/5_norm.jpg"></li>
+				<li data-image="./img/normal/7_norm.jpg"></li>
+			</ul>
+		</section>
+
+		<hr/>
+
 		<h2>Resources</h2>
 		<p>
 			Available from <a href="https://github.com/messagedigital/ms-carousel">
@@ -271,17 +286,20 @@
 				},
 				animations: {
 					custom: function (carousel, slide, speed) {
-						$.when(carousel.$slides.children().fadeOut()).done(function() {
-							carousel.$slides.children('*:nth-child('+(slide+1)+')').fadeIn();
+						$.when(carousel.$slides.children().fadeOut(speed)).done(function() {
+							carousel.$slides.children('*:nth-child('+(slide+1)+')').fadeIn(speed);
 						});
 					}
 				}
 			});
-			window.carousel3 = $('#carousel8').carousel({
+			window.carousel8 = $('#carousel8').carousel({
 				useThumbs: true,
 				allowZoom: true,
 				hideCarouselOnZoom: false,
 				hideThumbsOnZoom: false
+			});
+			window.carousel9 = $('#carousel9').carousel({
+				automatic: true
 			});
 		});
 	</script>
