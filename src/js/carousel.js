@@ -192,7 +192,8 @@
 			$zoomImage = $('<img src="'+ 
 				($zoomSlide.data('zoom') || $zoomSlide.data('image') || $zoomSlide.children('img').first().attr('src')) +
 				'">'),
-			$closeButton
+			$closeButton,
+			animationPromise
 		;
 
 		if (slide > self.slideCount - 1) {
@@ -222,15 +223,18 @@
 		$zoom.html($zoomImage);
 		$zoom.prepend($closeButton);
 		
-		$zoom.stop().slideDown();
 
 		if (self.config.hideCarouselOnZoom) {
-			self.$element.stop().slideUp();
+			animationPromise = self.$element.stop().slideUp();
 		}
 
 		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-			self.thumbs.$element.stop().slideUp();
+			animationPromise = self.thumbs.$element.stop().slideUp();
 		}
+		
+		$.when(animationPromise).done(function() {
+			$zoom.stop().slideDown();
+		});
 
 		self.zoomed = true;
 	};
@@ -240,15 +244,15 @@
 
 		if (!self.zoomed) return false;
 		
-		self.$zoom.stop().slideUp();
-		
-		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-			self.thumbs.$element.stop().slideDown();
-		}
+		$.when(self.$zoom.stop().slideUp()).done(function() {
+			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
+				self.thumbs.$element.stop().slideDown();
+			}
 
-		if (self.config.hideCarouselOnZoom) {
-			self.$element.stop().slideDown();
-		}
+			if (self.config.hideCarouselOnZoom) {
+				self.$element.stop().slideDown();
+			}
+		});
 
 		self.zoomed = false;
 	};
@@ -341,7 +345,7 @@
 			$(v).on('click.carousel', function () {
 				self.zoom(k);
 			});
-		});
+		}).addClass('control');
 
 		$zoom.hide();
 
