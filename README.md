@@ -135,4 +135,5 @@ allowZoom          | false     | boolean                      | Allows zoom to a
 zoomElement        | undefined | string&#124;jquery           | The element to insert the larger image view into. If undefined an element will be inserted after the carousel.
 hideCarouselOnZoom | true      | boolean                      | Hide the carousel when a zoom happens.
 hideThumbsOnZoom   | true      | boolean                      | Hide the thumbnails when a zoom happens.
+hideElementsOnZoom | []        | array                        | Elements to hide on zoom.
 thumbConfig        | object    | object                       | The config to use when creating the Thumbnail carousel. It may take all the same options as the regular carousel. By default arrows are shown and imagesPerSlide is set to 2.6
