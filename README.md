@@ -112,6 +112,10 @@ $('#carousel').carousel({
 </script>
 ```
 
+## Further examples
+
+A document with example carousel setups is included in the example directory.
+
 ## Options
 
 The options that may be passed in are as follows:
