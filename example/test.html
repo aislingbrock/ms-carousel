@@ -230,7 +230,7 @@
 
 		<hr/>
 
-		<h1>Carousel 9: Automatic Sliding</h1>
+		<h2>Carousel 9: Automatic Sliding</h2>
 		<section class="carousel" id="carousel9">
 			<ul class="slides">
 				<li data-image="./img/normal/6_norm.jpg"></li>
@@ -241,16 +241,54 @@
 				<li data-image="./img/normal/7_norm.jpg"></li>
 			</ul>
 		</section>
+		<hr/>
 
+		<h2>Carousel 10: Zoom hiding page</h2>
+		<p>
+			Zooming can happen without hiding the carousel or the thumbs using
+			'hideCarouselOnZoom: false' and 'hideThumbsOnZoom: false'
+			respectively.
+		</p>
+
+		<section class="carousel" id="carousel10" data-thumbs="#thumbs10" data-zoom="#zoom10">
+			<ul class="slides">
+				<li data-thumb="./img/thumbs/6_thumb.jpg" 
+					data-image="./img/normal/6_norm.jpg"
+					data-zoom="./img/6.jpg"></li>
+
+				<li data-thumb="./img/thumbs/2_thumb.jpg" 
+					data-image="./img/normal/2_norm.jpg"
+					data-zoom="./img/2.jpg"></li>
+
+				<li data-thumb="./img/thumbs/3_thumb.jpg" 
+					data-image="./img/normal/3_norm.jpg"
+					data-zoom="./img/3.jpg"></li>
+
+				<li data-thumb="./img/thumbs/4_thumb.jpg" 
+					data-image="./img/normal/4_norm.jpg"
+					data-zoom="./img/4.jpg"></li>
+
+				<li data-thumb="./img/thumbs/5_thumb.jpg" 
+					data-image="./img/normal/5_norm.jpg"
+					data-zoom="./img/5.jpg"></li>
+
+				<li data-thumb="./img/thumbs/7_thumb.jpg" 
+					data-image="./img/normal/7_norm.jpg"
+					data-zoom="./img/7.jpg"></li>
+
+			</ul>
+		</section>
+		<div id="thumbs10" class="thumbs carousel"></div>
 		<hr/>
 
 		<h2>Resources</h2>
 		<p>
 			Available from <a href="https://github.com/messagedigital/ms-carousel">
-			Github</a>. Plugin by <a href="http://mothership.ec">Mothership Ecommerce</a>.
+			Github</a>. Plugin by <a href="http://mothership.ec">Mothership</a>.
 		</p>
 	</div>
 
+	<div id="zoom10" class="carousel-zoom"><a href="#" class="unzoom">Close Modal</a></div>
 
 	<script type="text/javascript">
 		$(document).on('ready', function() {
@@ -300,6 +338,13 @@
 			});
 			window.carousel9 = $('#carousel9').carousel({
 				automatic: true
+			});
+			window.carousel10 = $('#carousel10').carousel({
+				useThumbs: true,
+				allowZoom: true,
+				hideCarouselOnZoom: false,
+				hideThumbsOnZoom: false,
+				hideElementsOnZoom: [$('.content')]
 			});
 		});
 	</script>

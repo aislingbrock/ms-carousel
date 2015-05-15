@@ -16,9 +16,10 @@
  * hideCarouselOnZoom (true): carousel will be hidden on zoom
  * hideThumbsOnZoom (true): thumbnails will be hidden on zoom 
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
- *
  * automatic (false): wheather to change automatically
  * automaticDelay (800): the delay between automatic changes
+ *
+ * 
  */
 (function($, window, document) {
 	'use strict';
@@ -54,7 +55,8 @@
 				}
 			},
 			automatic: false,
-			automaticDelay: 2000
+			automaticDelay: 2000,
+			hideElementsOnZoom: []
 		};
 
 		this.$element     = $element;
@@ -200,6 +202,8 @@
 			throw new Error('Slide out of range');
 		}
 
+		self.$element.trigger('zoom.carousel');
+
 		if (typeof self.$zoom === 'undefined') {
 			$zoom = $('<div class="carousel-zoom">');
 			$zoom.hide();
@@ -231,6 +235,10 @@
 		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
 			animationPromise = self.thumbs.$element.stop().slideUp();
 		}
+
+		$.each(self.config.hideElementsOnZoom, function (i, value) {
+			animationPromise = $(value).stop().slideUp();
+		});
 		
 		$.when(animationPromise).done(function() {
 			$zoom.stop().slideDown();
@@ -244,6 +252,8 @@
 
 		if (!self.zoomed) return false;
 		
+		self.$element.trigger('unzoom.carousel');
+
 		$.when(self.$zoom.stop().slideUp()).done(function() {
 			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
 				self.thumbs.$element.stop().slideDown();
@@ -252,6 +262,10 @@
 			if (self.config.hideCarouselOnZoom) {
 				self.$element.stop().slideDown();
 			}
+
+			$.each(self.config.hideElementsOnZoom, function (i, value) {
+				$(value).stop().slideDown();
+			});
 		});
 
 		self.zoomed = false;
@@ -399,7 +413,7 @@
 
 		carousel.init();
 
-		return carousel;
+		return this;
 	};
 
 })(jQuery, window, document);

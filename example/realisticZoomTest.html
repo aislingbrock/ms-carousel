@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Realistic Zoom Test</title>
+	
+	<link rel="stylesheet" type="text/css" href="../src/css/carousel.css">
+	<link rel="stylesheet" type="text/css" href="./css/test.css">
+
+	<script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../src/js/carousel.js"></script>
+</head>
+<body>
+	<div class="content">
+		<div class="inner">
+			
+			<h1>Realistic Zoom Test</h1>
+			<p>
+				This carousel is a realistic test using thumbnail and arrow navigation.
+				It hides a section of the page when zooming.
+			</p>
+
+			<section class="carousel" id="carousel" data-thumbs="#thumbs" data-zoom="#zoom">
+				<ul class="slides">
+					<li data-thumb="./img/thumbs/6_thumb.jpg" 
+						data-image="./img/normal/6_norm.jpg"
+						data-zoom="./img/6.jpg"></li>
+
+					<li data-thumb="./img/thumbs/2_thumb.jpg" 
+						data-image="./img/normal/2_norm.jpg"
+						data-zoom="./img/2.jpg"></li>
+
+					<li data-thumb="./img/thumbs/3_thumb.jpg" 
+						data-image="./img/normal/3_norm.jpg"
+						data-zoom="./img/3.jpg"></li>
+
+					<li data-thumb="./img/thumbs/4_thumb.jpg" 
+						data-image="./img/normal/4_norm.jpg"
+						data-zoom="./img/4.jpg"></li>
+
+					<li data-thumb="./img/thumbs/5_thumb.jpg" 
+						data-image="./img/normal/5_norm.jpg"
+						data-zoom="./img/5.jpg"></li>
+
+					<li data-thumb="./img/thumbs/7_thumb.jpg" 
+						data-image="./img/normal/7_norm.jpg"
+						data-zoom="./img/7.jpg"></li>
+
+				</ul>
+			</section>
+			<div id="thumbs" class="thumbs carousel"></div>
+		</div>
+
+	</div>
+	<div id="zoom" class="carousel-zoom"><a href="#" class="unzoom">Close Modal</a></div>
+		<hr/>
+	<div class="content">
+		
+		<h2>Resources</h2>
+		<p>
+			Available from <a href="https://github.com/messagedigital/ms-carousel">
+			Github</a>. Plugin by <a href="http://mothership.ec">Mothership</a>.
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		$(document).on('ready', function() {
+			window.carousel = $('#carousel').carousel({
+				useThumbs: true,
+				allowZoom: true,
+				hideCarouselOnZoom: false,
+				hideThumbsOnZoom: false,
+				hideElementsOnZoom: [$('.inner')]
+			});
+		});
+	</script>
+</body>
+</html>

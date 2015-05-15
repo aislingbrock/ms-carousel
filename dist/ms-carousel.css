@@ -73,3 +73,7 @@
 .carousel .dots li a {
 	display: inline-block;
 }
+
+.carousel .control {
+	cursor: pointer;
+}

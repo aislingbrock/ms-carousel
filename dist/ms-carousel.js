@@ -16,6 +16,10 @@
  * hideCarouselOnZoom (true): carousel will be hidden on zoom
  * hideThumbsOnZoom (true): thumbnails will be hidden on zoom 
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
+ * automatic (false): wheather to change automatically
+ * automaticDelay (800): the delay between automatic changes
+ *
+ * 
  */
 (function($, window, document) {
 	'use strict';
@@ -34,21 +38,25 @@
 			allowZoom: false,
 			animations: {
 				slide: function (carousel, slide, speed) {
-					var marginLeft = -slide*carousel.width,
-						animationSpeed = carousel.config.animation.speed || speed || 500
-					;
+					var marginLeft = -slide*carousel.width;
+
+					if (typeof speed == 'undefined') {
+						speed = 500;
+					}
 
 					carousel.$slides.stop().animate({
 						marginLeft: marginLeft+'px'
-					}, animationSpeed, 'linear');
+					}, speed, 'linear');
 				},
 				none: function(carousel, slide) {
 					var marginLeft = -slide*carousel.width;
 
 					carousel.$slides.css('margin-left', marginLeft+'px');
-					// carousel.update();
 				}
-			}
+			},
+			automatic: false,
+			automaticDelay: 2000,
+			hideElementsOnZoom: []
 		};
 
 		this.$element     = $element;
@@ -62,9 +70,12 @@
 	Carousel.prototype.goTo = function (slide, speed) {
 		var self = this,
 			animationType = self.config.animation.type,
-			animationSpeed = self.config.animation.speed || speed,
 			marginLeft = -slide*this.width
 		;
+
+		if (typeof speed == 'undefined') {
+			speed = self.config.animation.speed;
+		}
 
 		self.currentSlide = slide;
 
@@ -73,7 +84,7 @@
 		}
 
 		if (self.config.animations[animationType]) {
-			self.config.animations[animationType](self, slide, animationSpeed);
+			self.config.animations[animationType](self, slide, speed);
 		} else {
 			throw new Error('Animation of type ' + animationType + ' is not supported');
 		}
@@ -96,7 +107,6 @@
 			return;
 		}
 
-
 		return this.goTo(this.currentSlide - 1);
 	};
 
@@ -113,6 +123,8 @@
 		$slides.children().each(function (key, item) {
 			$(item).outerWidth(self.width/self.config.imagesPerSlide);
 		});
+
+		self.goTo(self.currentSlide, 0);
 
 		self._updateControls();
 	};
@@ -162,6 +174,16 @@
 			}
 		});
 
+		if (self.config.automatic) {
+			window.setInterval(function () {
+				if (self.currentSlide + 1 >= self.slideCount) {
+					self.goTo(0);
+				} else{
+					self.next();
+				}
+			}, self.config.automaticDelay);
+		}
+
 		self.update();
 	};
 
@@ -172,12 +194,15 @@
 			$zoomImage = $('<img src="'+ 
 				($zoomSlide.data('zoom') || $zoomSlide.data('image') || $zoomSlide.children('img').first().attr('src')) +
 				'">'),
-			$closeButton
+			$closeButton,
+			animationPromise
 		;
 
 		if (slide > self.slideCount - 1) {
 			throw new Error('Slide out of range');
 		}
+
+		self.$element.trigger('zoom.carousel');
 
 		if (typeof self.$zoom === 'undefined') {
 			$zoom = $('<div class="carousel-zoom">');
@@ -202,15 +227,22 @@
 		$zoom.html($zoomImage);
 		$zoom.prepend($closeButton);
 		
-		$zoom.stop().slideDown();
 
 		if (self.config.hideCarouselOnZoom) {
-			self.$element.stop().slideUp();
+			animationPromise = self.$element.stop().slideUp();
 		}
 
 		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-			self.thumbs.$element.stop().slideUp();
+			animationPromise = self.thumbs.$element.stop().slideUp();
 		}
+
+		$.each(self.config.hideElementsOnZoom, function (i, value) {
+			animationPromise = $(value).stop().slideUp();
+		});
+		
+		$.when(animationPromise).done(function() {
+			$zoom.stop().slideDown();
+		});
 
 		self.zoomed = true;
 	};
@@ -220,15 +252,21 @@
 
 		if (!self.zoomed) return false;
 		
-		self.$zoom.stop().slideUp();
-		
-		if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-			self.thumbs.$element.stop().slideDown();
-		}
+		self.$element.trigger('unzoom.carousel');
 
-		if (self.config.hideCarouselOnZoom) {
-			self.$element.stop().slideDown();
-		}
+		$.when(self.$zoom.stop().slideUp()).done(function() {
+			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
+				self.thumbs.$element.stop().slideDown();
+			}
+
+			if (self.config.hideCarouselOnZoom) {
+				self.$element.stop().slideDown();
+			}
+
+			$.each(self.config.hideElementsOnZoom, function (i, value) {
+				$(value).stop().slideDown();
+			});
+		});
 
 		self.zoomed = false;
 	};
@@ -321,7 +359,7 @@
 			$(v).on('click.carousel', function () {
 				self.zoom(k);
 			});
-		});
+		}).addClass('control');
 
 		$zoom.hide();
 
@@ -375,7 +413,7 @@
 
 		carousel.init();
 
-		return carousel;
+		return this;
 	};
 
 })(jQuery, window, document);

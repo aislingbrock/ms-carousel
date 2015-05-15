@@ -1,6 +1,6 @@
 # Mothership Carousel
 
-The standard carousel for [Mothership](http://www.mothership.ec) sites.
+A general purpose carousel plugin built with [Mothership](http://mothership.ec) in mind.
 
 ## Basic usage
 
