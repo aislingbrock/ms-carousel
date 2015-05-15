@@ -1,6 +1,6 @@
 # Mothership Carousel
 
-A general purpose carousel plugin built with [Mothership](http://mothership.ec) in mind.
+A jQuery image carousel, built by [Mothership](http://mothership.ec).
 
 ## Basic usage
 
