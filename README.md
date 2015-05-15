@@ -92,7 +92,7 @@ This will generate a new carousel in the thumbnail element and link it's slides 
 
 ## Custom Animations
 
-Custom animations may be defined in the `animations` option. These are functions may be called when the `goTo()` function is called. They are sould be defined as `function(carousel, slide, speed)` and should modify the `carousel.$slides` to achieve a transition to the correct slide.
+Custom animations may be defined in the `animations` option. These are functions which may be called when the `goTo()` function is called. They are sould be defined as `function(carousel, slide, speed)` and should modify the `carousel.$slides` to achieve a transition to the correct slide.
 
 The following example defines a custom animation to fade between slides in `animations` and sets it as the animation to use in the `animation` option.
 ```html
