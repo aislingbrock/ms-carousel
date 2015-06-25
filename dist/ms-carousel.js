@@ -260,21 +260,19 @@
 
 		$.when(self.$zoom.stop().slideUp()).done(function() {
 			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-				self.thumbs.$element.stop().slideDown(function() {
-					self.thumbs.update();
-				});
+				self.thumbs.$element.stop().slideDown();
 			}
 
 			if (self.config.hideCarouselOnZoom) {
-				self.$element.stop().slideDown(function() {
-					self.update();
-				});
+				self.$element.stop().slideDown();
 			}
 
 			$.each(self.config.hideElementsOnZoom, function (i, value) {
 				$(value).stop().slideDown();
 			});
 
+			self.update();
+			self.thumbs.update();
 		});
 
 		self.zoomed = false;
