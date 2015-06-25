@@ -115,6 +115,10 @@
 			$slides = self.$slides
 		;
 
+		if (!self.$element.is(':visible')) {
+			return;
+		}
+
 		self.width = self.$element.width();
 		self.slideCount = Math.ceil(self.$slides.children().size()/self.config.imagesPerSlide);
 
@@ -256,16 +260,21 @@
 
 		$.when(self.$zoom.stop().slideUp()).done(function() {
 			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
-				self.thumbs.$element.stop().slideDown();
+				self.thumbs.$element.stop().slideDown(function() {
+					self.thumbs.update();
+				});
 			}
 
 			if (self.config.hideCarouselOnZoom) {
-				self.$element.stop().slideDown();
+				self.$element.stop().slideDown(function() {
+					self.update();
+				});
 			}
 
 			$.each(self.config.hideElementsOnZoom, function (i, value) {
 				$(value).stop().slideDown();
 			});
+
 		});
 
 		self.zoomed = false;
@@ -412,6 +421,8 @@
 		var carousel = new Carousel(this, options);
 
 		carousel.init();
+
+		this.carousel = carousel;
 
 		return this;
 	};
