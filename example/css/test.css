@@ -2,14 +2,14 @@
 	font-family: sans-serif;
 }
 
-.carousel .arrow {
+.msc-carousel .msc-arrow {
 	opacity: 0.5;
 	position: absolute;
 	top: 50%;
 	margin-top: -30px;
 }
 
-.carousel .arrow.left {
+.msc-carousel .msc-arrow.left {
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -18,7 +18,7 @@
 	left: 10px;
 }
 
-.carousel .arrow.right {
+.msc-carousel .msc-arrow.right {
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -27,19 +27,19 @@
 	right: 10px;
 }
 
-.carousel .arrow:hover {
+.msc-carousel .msc-arrow:hover {
 	opacity: 1;
 }
 
-.carousel .arrow span {
+.msc-carousel .msc-arrow span {
 	display: none;
 }
 
-ol.dots {
+ol.msc-dots {
 	overflow: hidden;
 }
 
-ol.dots li a {
+ol.msc-dots li a {
 	width: 10px;
 	height: 10px;
 	border-radius: 10px;
@@ -47,7 +47,7 @@ ol.dots li a {
 	text-indent: -999em;
 }
 
-ol.dots li.active a {
+ol.msc-dots li.active a {
 	background-color: red;
 }
 
@@ -59,19 +59,19 @@ ol.dots li.active a {
 	margin-right: auto;
 }
 
-.carousel-zoom,
-.carousel-zoom img {
+.msc-carousel-zoom,
+.msc-carousel-zoom img {
 	max-width: 100%;
 }
 
-.carousel-zoom .unzoom {
+.msc-carousel-zoom .unzoom {
 	display: block;
 	background: #333;
 	color: #FFF;
 	padding: 5px 10px;
 }
 
-.carousel-zoom .unzoom:hover {
+.msc-carousel-zoom .unzoom:hover {
 	background: #666;
 }
 

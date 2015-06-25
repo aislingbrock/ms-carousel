@@ -156,11 +156,11 @@
 		var self = this;
 
 		self.$element.data('instance', self);
-		self.$slides = self.$element.children('.slides');
+		self.$slides = self.$element.children('.msc-slides');
 
 		self._initControls();
 
-		$(window).on('orientationchange.carousel resize.carousel', function () {
+		$(window).on('orientationchange.msc-carousel resize.msc-carousel', function () {
 			self.update();
 		});
 
@@ -202,12 +202,12 @@
 			throw new Error('Slide out of range');
 		}
 
-		self.$element.trigger('zoom.carousel');
+		self.$element.trigger('zoom.msc-carousel');
 
 		if (typeof self.$zoom === 'undefined') {
-			$zoom = $('<div class="carousel-zoom">');
+			$zoom = $('<div class="msc-carousel-zoom">');
 			$zoom.hide();
-			$zoom.on('click.carousel', '.unzoom', function (e) {
+			$zoom.on('click.msc-carousel', '.msc-unzoom', function (e) {
 				e.preventDefault();
 				self.unZoom();
 			});
@@ -223,7 +223,7 @@
 			self.unZoom();
 		}
 
-		$closeButton = $zoom.children('.unzoom').size() ? $zoom.children('.unzoom') : $('<a href="#" class="unzoom">Close</a>');
+		$closeButton = $zoom.children('.msc-unzoom').size() ? $zoom.children('.msc-unzoom') : $('<a href="#" class="msc-unzoom">Close</a>');
 		$zoom.html($zoomImage);
 		$zoom.prepend($closeButton);
 		
@@ -252,7 +252,7 @@
 
 		if (!self.zoomed) return false;
 		
-		self.$element.trigger('unzoom.carousel');
+		self.$element.trigger('unzoom.msc-carousel');
 
 		$.when(self.$zoom.stop().slideUp()).done(function() {
 			if (self.config.hideThumbsOnZoom && typeof self.thumbs !== 'undefined') {
@@ -283,15 +283,15 @@
 
 		if (!self.config.useDots) return false;
 
-		self.$dots = $('<ol class="dots">');
+		self.$dots = $('<ol class="msc-dots">');
 
 		for (i=0; i<self.$slides.children().size(); ++i) {
-			$dot = $('<li><a href="#" class="dot'+(self.currentSlide === i ? ' active' : '')+
+			$dot = $('<li><a href="#" class="msc-dot'+(self.currentSlide === i ? ' active' : '')+
 				'" data-slide='+i+'><span>'+(i+1)+'</span></a></li>');
 			self.$dots.append($dot);
 		}
 
-		self.$dots.on('click.carousel', '.dot', function (e) {
+		self.$dots.on('click.msc-carousel', '.msc-dot', function (e) {
 			e.preventDefault();
 			self.goTo($(this).data('slide'));
 		});
@@ -316,18 +316,18 @@
 		// don't display thumbnails if only one or fewer slides
 		if (self.$slides.children().size() <= 1) return false;
 		
-		$thumbs.append($('<ul class="slides">'));
+		$thumbs.append($('<ul class="msc-slides">'));
 
 		self.$slides.children().each(function(k, v) {
 			var imgurl = $(v).data('thumb'),
-				element = $('<li><a class="thumb'+(self.currentSlide === k ? ' active' : '')+
+				element = $('<li><a class="msc-thumb'+(self.currentSlide === k ? ' active' : '')+
 					'" data-slide="'+k+'" href="#"><img src="'+imgurl+'"></a></li>')
 			;
 
-			$thumbs.children('.slides').append(element);
+			$thumbs.children('.msc-slides').append(element);
 		});
 
-		$thumbs.on('click.carousel', '.thumb', function (e) {
+		$thumbs.on('click.msc-carousel', '.msc-thumb', function (e) {
 			e.preventDefault();
 			$(this).parent().siblings().removeClass('active');
 			$(this).parent().addClass('active');
@@ -335,7 +335,7 @@
 		});
 
 		thumbCarousel = new Carousel($thumbs, thumbConfig);
-		$thumbs.addClass('carousel');
+		$thumbs.addClass('msc-carousel');
 		thumbCarousel.init();
 
 		self.thumbs = thumbCarousel;
@@ -350,13 +350,13 @@
 
 		if (!this.config.allowZoom) return false;
 
-		$zoom.on('click.carousel', '.unzoom', function (e) {
+		$zoom.on('click.msc-carousel', '.msc-unzoom', function (e) {
 			e.preventDefault();
 			self.unZoom();
 		});
 
 		self.$slides.children().each(function (k, v) {
-			$(v).on('click.carousel', function () {
+			$(v).on('click.msc-carousel', function () {
 				self.zoom(k);
 			});
 		}).addClass('control');
@@ -377,29 +377,29 @@
 		if (!self.config.useArrows) return false;
 
 		if (typeof arrowLeft === 'undefined') {
-			arrowLeft = self.$element.children('.arrow.left');
+			arrowLeft = self.$element.children('.msc-arrow.left');
 
 			if (!arrowLeft.size()) {
-				arrowLeft = $('<a href="#" class="arrow left"><span>Prev</span></a>');
+				arrowLeft = $('<a href="#" class="msc-arrow left"><span>Prev</span></a>');
 				self.$element.append(arrowLeft);
 			}
 		}
 
 		if (typeof arrowRight === 'undefined') {
-			arrowRight = self.$element.children('.arrow.right');
+			arrowRight = self.$element.children('.msc-arrow.right');
 
 			if (!arrowRight.size()) {
-				arrowRight = $('<a href="#" class="arrow right"><span>Next</span></a>');
+				arrowRight = $('<a href="#" class="msc-arrow right"><span>Next</span></a>');
 				self.$element.append(arrowRight);
 			}
 		}
 
-		arrowLeft.on('click.carousel', function (e) {
+		arrowLeft.on('click.msc-carousel', function (e) {
 			e.preventDefault();
 			self.prev.call(self);
 		});
 
-		arrowRight.on('click.carousel', function (e) {
+		arrowRight.on('click.msc-carousel', function (e) {
 			e.preventDefault();
 			self.next.call(self);
 		});

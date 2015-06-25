@@ -14,8 +14,8 @@
 		<h1>Carousel Test Document</h1>
 
 		<h2>Carousel 1: Arrow nav</h2>
-		<section class="carousel" id="carousel1">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel1">
+			<ul class="msc-slides">
 				<li>
 					<img src="./img/normal/6_norm.jpg">
 				</li>
@@ -35,15 +35,15 @@
 					<img src="./img/normal/7_norm.jpg">
 				</li>
 			</ul>
-			<a href="#" class="arrow left"><span>Prev</span></a>
-			<a href="#" class="arrow right"><span>Next</span></a>
+			<a href="#" class="msc-arrow left"><span>Prev</span></a>
+			<a href="#" class="msc-arrow right"><span>Next</span></a>
 		</section>
 
 		<hr/>
 		<h2>Carousel 2: Thumbs</h2>
 		<p>A class of carousel is automatically added to the thumbs element</p>
-		<section class="carousel" id="carousel2" data-thumbs="#thumbs2">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel2" data-thumbs="#thumbs2">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg">
 					<img src="./img/normal/6_norm.jpg">
 				</li>
@@ -64,13 +64,13 @@
 				</li>
 			</ul>
 		</section>
-		<div id="thumbs2" class="carousel thumbs"></div>
+		<div id="thumbs2" class="msc-carousel msc-thumbs"></div>
 
 		<hr/>
 		<h2>Carousel 3: Zoomable</h2>
 		<p>This slider zooms when clicked on.</p>
-		<section class="carousel" id="carousel3" data-thumbs="#thumbs3" data-zoom="#zoom3">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel3" data-thumbs="#thumbs3" data-zoom="#zoom3">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"
 					data-zoom="./img/6.jpg"></li>
@@ -97,8 +97,8 @@
 
 			</ul>
 		</section>
-		<div id="thumbs3" class="carousel thumbs"></div>
-		<div id="zoom3" class="carousel-zoom"></div>
+		<div id="thumbs3" class="msc-carousel msc-thumbs"></div>
+		<div id="zoom3" class="msc-carousel-zoom"></div>
 
 		<hr/>
 		<h2>Carousel 4: Thumbnail options</h2>
@@ -107,8 +107,8 @@
 			also increased. The thumbnails are in a carousel and options may be set
 			using the thumbConfig setting.
 		</p>
-		<section class="carousel" id="carousel4" data-thumbs="#thumbs4">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel4" data-thumbs="#thumbs4">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"></li>
 
@@ -127,10 +127,10 @@
 				<li data-thumb="./img/thumbs/7_thumb.jpg" 
 					data-image="./img/normal/7_norm.jpg"></li>
 			</ul>
-			<a href="#" class="arrow left"><span>Prev</span></a>
-			<a href="#" class="arrow right"><span>Next</span></a>
+			<a href="#" class="msc-arrow left"><span>Prev</span></a>
+			<a href="#" class="msc-arrow right"><span>Next</span></a>
 		</section>
-		<div id="thumbs4" class="carousel thumbs"></div>
+		<div id="thumbs4" class="msc-carousel msc-thumbs"></div>
 		<hr/>
 
 		<h2>Carousel 5: One Image only thumbnail setting enabled</h2>
@@ -138,23 +138,23 @@
 			Thumbnails don't display even if they are enabled when there is only one 
 			image in the gallery
 		</p>
-		<section class="carousel" id="carousel5" data-thumbs="#thumbs5">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel5" data-thumbs="#thumbs5">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"></li>
 			</ul>
-			<a href="#" class="arrow left"><span>Prev</span></a>
-			<a href="#" class="arrow right"><span>Next</span></a>
+			<a href="#" class="msc-arrow left"><span>Prev</span></a>
+			<a href="#" class="msc-arrow right"><span>Next</span></a>
 		</section>
-		<div class="carousel thumbs" id="thumbs5"></div>
+		<div class="msc-carousel msc-thumbs" id="thumbs5"></div>
 
 		<hr/>
 		<h2>Carousel 6: Dots</h2>
 		<p>
 			Dots can be used as navigation.
 		</p>
-		<section class="carousel" id="carousel6">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel6">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"></li>
 
@@ -178,8 +178,8 @@
 	
 		<h2>Carousel 7: Custom transitions</h2>
 
-		<section class="carousel" id="carousel7">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel7">
+			<ul class="msc-slides">
 				<li data-image="./img/normal/6_norm.jpg"></li>
 				<li data-image="./img/normal/2_norm.jpg"></li>
 				<li data-image="./img/normal/3_norm.jpg"></li>
@@ -197,8 +197,8 @@
 			respectively.
 		</p>
 
-		<section class="carousel" id="carousel8" data-thumbs="#thumbs8" data-zoom="#zoom8">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel8" data-thumbs="#thumbs8" data-zoom="#zoom8">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"
 					data-zoom="./img/6.jpg"></li>
@@ -226,13 +226,13 @@
 			</ul>
 		</section>
 		<div id="thumbs8" class="thumbs carousel"></div>
-		<div id="zoom8" class="carousel-zoom"><a href="#" class="unzoom">Close Modal</a></div>
+		<div id="zoom8" class="msc-carousel-zoom"><a href="#" class="msc-unzoom">Close Modal</a></div>
 
 		<hr/>
 
 		<h2>Carousel 9: Automatic Sliding</h2>
-		<section class="carousel" id="carousel9">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel9">
+			<ul class="msc-slides">
 				<li data-image="./img/normal/6_norm.jpg"></li>
 				<li data-image="./img/normal/2_norm.jpg"></li>
 				<li data-image="./img/normal/3_norm.jpg"></li>
@@ -250,8 +250,8 @@
 			respectively.
 		</p>
 
-		<section class="carousel" id="carousel10" data-thumbs="#thumbs10" data-zoom="#zoom10">
-			<ul class="slides">
+		<section class="msc-carousel" id="carousel10" data-thumbs="#thumbs10" data-zoom="#zoom10">
+			<ul class="msc-slides">
 				<li data-thumb="./img/thumbs/6_thumb.jpg" 
 					data-image="./img/normal/6_norm.jpg"
 					data-zoom="./img/6.jpg"></li>
@@ -288,7 +288,7 @@
 		</p>
 	</div>
 
-	<div id="zoom10" class="carousel-zoom"><a href="#" class="unzoom">Close Modal</a></div>
+	<div id="zoom10" class="msc-carousel-zoom"><a href="#" class="msc-unzoom">Close Modal</a></div>
 
 	<script type="text/javascript">
 		$(document).on('ready', function() {
