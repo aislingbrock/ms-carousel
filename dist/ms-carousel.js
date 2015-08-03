@@ -423,8 +423,7 @@
 		var carousel = new Carousel(this, options);
 
 		carousel.init();
-
-		this.carousel = carousel;
+		this.data('carousel', carousel);
 
 		return this;
 	};

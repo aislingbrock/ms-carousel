@@ -40,6 +40,32 @@
 			<a href="#" class="msc-arrow right"><span>Next</span></a>
 		</section>
 
+		<h2>Carousel 2: CSS Slide/Fade</h2>
+		<section class="msc-carousel msc-css-slide" id="carousel2">
+			<ul class="msc-slides">
+				<li>
+					<img src="./img/normal/6_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/2_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/3_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/4_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/5_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/7_norm.jpg">
+				</li>
+			</ul>
+			<a href="#" class="msc-arrow left"><span>Prev</span></a>
+			<a href="#" class="msc-arrow right"><span>Next</span></a>
+		</section>
+
 		<h2>Resources</h2>
 		<p>
 			Available from <a href="https://github.com/mothership-ec/ms-carousel">
@@ -50,6 +76,13 @@
 	<script type="text/javascript">
 		$(document).on('ready', function() {
 			window.carousel1 = $('#carousel1').carousel({
+				animation: {
+					type: "css"
+				},
+				useDots: true
+			});
+
+			window.carousel2 = $('#carousel2').carousel({
 				animation: {
 					type: "css"
 				},
