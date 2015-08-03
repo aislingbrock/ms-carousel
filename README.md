@@ -112,6 +112,8 @@ $('#carousel').carousel({
 </script>
 ```
 
+You can also define CSS animations. Setting the animation type to `"css"` will make the carousel put an `.active` class on the current slide but leave the animation up to the defined CSS
+
 ## Further examples
 
 A document with example carousel setups is included in the example directory.
