@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/messagedigital/ms-carousel.git"
+    "url": "https://github.com/mothership-ec/ms-carousel.git"
   },
   "author": "dev@message.co.uk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/messagedigital/ms-carousel/issues"
+    "url": "https://github.com/mothership-ec/ms-carousel/issues"
   },
-  "homepage": "https://github.com/messagedigital/ms-carousel",
+  "homepage": "https://github.com/mothership-ec/ms-carousel",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
