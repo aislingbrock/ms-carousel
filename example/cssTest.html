@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Carousel Test</title>
+	
+	<link rel="stylesheet" type="text/css" href="../src/css/carousel.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/animations.css">
+	<link rel="stylesheet" type="text/css" href="./css/test.css">
+
+	<script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="../src/js/carousel.js"></script>
+</head>
+<body>
+	<div class="content">
+		<h1>CSS Transitions Carousel Test Document</h1>
+
+		<h2>Carousel 1: CSS Fade</h2>
+		<section class="msc-carousel msc-css-fade" id="carousel1">
+			<ul class="msc-slides">
+				<li>
+					<img src="./img/normal/6_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/2_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/3_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/4_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/5_norm.jpg">
+				</li>
+				<li>
+					<img src="./img/normal/7_norm.jpg">
+				</li>
+			</ul>
+			<a href="#" class="msc-arrow left"><span>Prev</span></a>
+			<a href="#" class="msc-arrow right"><span>Next</span></a>
+		</section>
+
+		<h2>Resources</h2>
+		<p>
+			Available from <a href="https://github.com/messagedigital/ms-carousel">
+			Github</a>. Plugin by <a href="http://mothership.ec">Mothership</a>.
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		$(document).on('ready', function() {
+			window.carousel1 = $('#carousel1').carousel({
+				animation: {
+					type: "css"
+				}
+			});
+		});
+	</script>
+</body>
+</html>
