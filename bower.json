@@ -2,7 +2,8 @@
   "name": "Mothership Carousel",
   "version": "0.0.0",
   "authors": [
-    "Samuel Trangmar-Keates <sam@message.co.uk>"
+    "Samuel Trangmar-Keates <sam@message.co.uk>",
+    "Mothership dev team <hello@mothership.co.uk>"
   ],
   "description": "A carousel plugin for Mothership",
   "main": "src/js/carousel.js",
