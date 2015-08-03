@@ -7,7 +7,7 @@
  * useThumbs (false): if true then thumbnail navigation will be used
  * thumbElement (undefined): if given this will be used to contain the thumbs
  * animation:
- *   - type (slide): the type of animation (currently supports slide and none by default)
+ *   - type (slide): the type of animation (currently supports slide, css and none by default)
  *   - speed (500): the animation speed
  * animations (object): the animation functions
  * imagesPerSlide (1): the number of images shown at any one time
@@ -40,6 +40,8 @@
 				slide: function (carousel, slide, speed) {
 					var marginLeft = -slide*carousel.width;
 
+					carousel.$slides.css('min-width', (carousel.slideCount*carousel.width) +'px');
+
 					if (typeof speed == 'undefined') {
 						speed = 500;
 					}
@@ -47,6 +49,10 @@
 					carousel.$slides.stop().animate({
 						marginLeft: marginLeft+'px'
 					}, speed, 'linear');
+				},
+				css: function(carousel, slide) {
+					carousel.$slides.children(":not(*:nth-child("+(slide+1)+"))").removeClass('active');
+					carousel.$slides.children("*:nth-child("+(slide+1)+")").addClass('active');
 				},
 				none: function(carousel, slide) {
 					var marginLeft = -slide*carousel.width;
@@ -121,8 +127,6 @@
 
 		self.width = self.$element.width();
 		self.slideCount = Math.ceil(self.$slides.children().size()/self.config.imagesPerSlide);
-
-		$slides.css('min-width', (self.slideCount*self.width) +'px');
 
 		$slides.children().each(function (key, item) {
 			$(item).outerWidth(self.width/self.config.imagesPerSlide);
