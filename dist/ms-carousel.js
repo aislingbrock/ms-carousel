@@ -18,8 +18,6 @@
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
  * automatic (false): wheather to change automatically
  * automaticDelay (800): the delay between automatic changes
- *
- * 
  */
 (function($, window, document) {
 	'use strict';
@@ -56,6 +54,8 @@
 				},
 				none: function(carousel, slide) {
 					var marginLeft = -slide*carousel.width;
+
+					carousel.$slides.css('min-width', (carousel.slideCount*carousel.width) +'px');
 
 					carousel.$slides.css('margin-left', marginLeft+'px');
 				}
@@ -427,5 +427,4 @@
 
 		return this;
 	};
-
 })(jQuery, window, document);

@@ -55,6 +55,8 @@
 				none: function(carousel, slide) {
 					var marginLeft = -slide*carousel.width;
 
+					carousel.$slides.css('min-width', (carousel.slideCount*carousel.width) +'px');
+
 					carousel.$slides.css('margin-left', marginLeft+'px');
 				}
 			},
