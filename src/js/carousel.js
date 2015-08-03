@@ -18,8 +18,6 @@
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
  * automatic (false): wheather to change automatically
  * automaticDelay (800): the delay between automatic changes
- *
- * 
  */
 (function($, window, document) {
 	'use strict';
@@ -427,5 +425,4 @@
 
 		return this;
 	};
-
 })(jQuery, window, document);
