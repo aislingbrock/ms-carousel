@@ -139,3 +139,6 @@ hideCarouselOnZoom | true      | boolean                      | Hide the carouse
 hideThumbsOnZoom   | true      | boolean                      | Hide the thumbnails when a zoom happens.
 hideElementsOnZoom | []        | array                        | Elements to hide on zoom.
 thumbConfig        | object    | object                       | The config to use when creating the Thumbnail carousel. It may take all the same options as the regular carousel. By default arrows are shown and imagesPerSlide is set to 2.6
+automatic          | false     | boolean                      | Whether to play automatically
+automaticDelay     | 800       | int                          | Time between transitions when playing automatically
+pauseOnInteraction | true      | boolean                      | Stops playing automatically after interaction with controls
