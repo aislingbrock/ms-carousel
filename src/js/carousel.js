@@ -18,6 +18,8 @@
  * thumbConfig (undefined): the config for the thumbnail slider. the important option is imagesPerSlide
  * automatic (false): wheather to change automatically
  * automaticDelay (800): the delay between automatic changes
+ * pauseOnInteraction (true): Will pause automatic changes when controls are interracted with
+ * hideElementsOnZoom ([]): Elements to hide on zoom
  */
 (function($, window, document) {
 	'use strict';
@@ -62,6 +64,7 @@
 			},
 			automatic: false,
 			automaticDelay: 2000,
+			pauseOnInteraction: true,
 			hideElementsOnZoom: []
 		};
 
@@ -70,6 +73,7 @@
 		this.width        = $element.width();
 		this.currentSlide = 0;
 		this.controls     = {};
+		this.paused       = false;
 		this.zoomed       = false;
 	}
 
@@ -184,6 +188,8 @@
 
 		if (self.config.automatic) {
 			window.setInterval(function () {
+				if (self.paused) return;
+
 				if (self.currentSlide + 1 >= self.slideCount) {
 					self.goTo(0);
 				} else{
@@ -216,7 +222,9 @@
 			$zoom = $('<div class="msc-carousel-zoom">');
 			$zoom.hide();
 			$zoom.on('click.msc-carousel', '.msc-unzoom', function (e) {
+				if (self.config.pauseOnInteraction) self.paused = true;
 				e.preventDefault();
+
 				self.unZoom();
 			});
 			self.$element.after($zoom);
@@ -303,7 +311,9 @@
 		}
 
 		self.$dots.on('click.msc-carousel', '.msc-dot', function (e) {
+			if (self.config.pauseOnInteraction) self.paused = true;
 			e.preventDefault();
+
 			self.goTo($(this).data('slide'));
 		});
 
@@ -339,7 +349,9 @@
 		});
 
 		$thumbs.on('click.msc-carousel', '.msc-thumb', function (e) {
+			if (self.config.pauseOnInteraction) self.paused = true;
 			e.preventDefault();
+
 			$(this).parent().siblings().removeClass('active');
 			$(this).parent().addClass('active');
 			self.goTo($(this).data('slide'));
@@ -362,12 +374,15 @@
 		if (!this.config.allowZoom) return false;
 
 		$zoom.on('click.msc-carousel', '.msc-unzoom', function (e) {
+			if (self.config.pauseOnInteraction) self.paused = true;
 			e.preventDefault();
+
 			self.unZoom();
 		});
 
 		self.$slides.children().each(function (k, v) {
 			$(v).on('click.msc-carousel', function () {
+				if (self.config.pauseOnInteraction) self.paused = true;
 				self.zoom(k);
 			});
 		}).addClass('control');
@@ -406,12 +421,16 @@
 		}
 
 		arrowLeft.on('click.msc-carousel', function (e) {
+			if (self.config.pauseOnInteraction) self.paused = true;
 			e.preventDefault();
+
 			self.prev.call(self);
 		});
 
 		arrowRight.on('click.msc-carousel', function (e) {
+			if (self.config.pauseOnInteraction) self.paused = true;
 			e.preventDefault();
+
 			self.next.call(self);
 		});
 
